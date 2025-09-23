@@ -1,0 +1,88 @@
+[gd_scene load_steps=12 format=3 uid="uid://dagnn5tepb5q8"]
+
+[ext_resource type="Texture2D" uid="uid://c5mnp2fqsesmr" path="res://assets/space-dog-SHEET.png" id="1_lpki1"]
+[ext_resource type="Script" path="res://scripts/enemy.gd" id="1_pq7hx"]
+[ext_resource type="Script" path="res://components/SpawnBullet.gd" id="3_gipmy"]
+[ext_resource type="PackedScene" uid="uid://dtkqqgmtrxbgx" path="res://scenes/enemy_bullet.tscn" id="4_kyb1l"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_emxji"]
+atlas = ExtResource("1_lpki1")
+region = Rect2(0, 48, 96, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rvb51"]
+atlas = ExtResource("1_lpki1")
+region = Rect2(0, 96, 96, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fy1d5"]
+atlas = ExtResource("1_lpki1")
+region = Rect2(0, 144, 96, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qf4w8"]
+atlas = ExtResource("1_lpki1")
+region = Rect2(0, 192, 96, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n3niu"]
+atlas = ExtResource("1_lpki1")
+region = Rect2(0, 240, 96, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hbat0"]
+atlas = ExtResource("1_lpki1")
+region = Rect2(0, 288, 96, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_tdcxa"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_emxji")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rvb51")
+}],
+"loop": true,
+"name": &"default",
+"speed": 7.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fy1d5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qf4w8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n3niu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hbat0")
+}],
+"loop": false,
+"name": &"destroyed",
+"speed": 7.0
+}]
+
+[node name="Enemy" type="CharacterBody2D"]
+script = ExtResource("1_pq7hx")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.791667, 0.791667)
+sprite_frames = SubResource("SpriteFrames_tdcxa")
+autoplay = "default"
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+position = Vector2(-0.0977101, 1.59638)
+scale = Vector2(0.516842, 0.486128)
+polygon = PackedVector2Array(-67.5299, -25.9117, -63.6602, 7.00149, -41, 12, -40.4423, 33.7434, -15, 34, -12, 21, 13, 21, 15, 34, 28.949, 33.8614, 40.8204, 33.7434, 43, 11, 65.9731, 4.94442, 67.908, -25.9117)
+
+[node name="RightMuzzle" type="Marker2D" parent="."]
+position = Vector2(15, 18)
+
+[node name="LeftMuzzle" type="Marker2D" parent="."]
+position = Vector2(-15, 18)
+
+[node name="SpawnBullet" type="Node2D" parent="."]
+script = ExtResource("3_gipmy")
+scene = ExtResource("4_kyb1l")
+
+[node name="fireTimer" type="Timer" parent="."]
+wait_time = 0.7
+autostart = true

@@ -6,6 +6,6 @@ extends ParallaxBackground
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	WStars.motion_offset.y += 10 * delta
-	BYStars.motion_offset.y += 30 * delta
+	WStars.motion_offset.y += 33 * delta
+	BYStars.motion_offset.y += 42 * delta
 	pass

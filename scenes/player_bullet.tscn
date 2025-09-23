@@ -7,13 +7,15 @@
 script = ExtResource("1_xl7dl")
 
 [node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
-position = Vector2(-0.548202, 0.0353178)
+position = Vector2(-5.96046e-08, -1)
 rotation = 1.5708
-scale = Vector2(0.924196, 0.382548)
+scale = Vector2(0.598084, 0.190464)
 enable_node_path = NodePath("")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0.271618, -1)
 rotation = 1.5708
+scale = Vector2(0.696166, 0.606769)
 texture = ExtResource("2_uocue")
 
 [connection signal="screen_exited" from="VisibleOnScreenEnabler2D" to="." method="_on_visible_on_screen_enabler_2d_screen_exited"]

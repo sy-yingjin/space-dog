@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://x1ytt22jc8rk"]
+[gd_scene load_steps=9 format=3 uid="uid://x1ytt22jc8rk"]
 
 [ext_resource type="Script" path="res://scenes/parallax_background.gd" id="1_4jdfk"]
 [ext_resource type="PackedScene" uid="uid://doxthayeumto7" path="res://scenes/player.tscn" id="1_h2pjh"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://dhw07qe7h2gyx" path="res://parallax/space-dog_asset_parallax_10.png" id="3_y6lnp"]
 [ext_resource type="Texture2D" uid="uid://bsqhishv3e3rq" path="res://parallax/space-dog_asset_parallax_11.png" id="4_bwatb"]
 [ext_resource type="Texture2D" uid="uid://ybswwfn72hpf" path="res://parallax/space-dog_asset_parallax_2.png" id="5_n82uh"]
+[ext_resource type="PackedScene" uid="uid://dagnn5tepb5q8" path="res://scenes/enemy.tscn" id="7_suecp"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_hyx6j"]
 animations = [{
@@ -51,3 +52,9 @@ texture = ExtResource("5_n82uh")
 [node name="Player" parent="." instance=ExtResource("1_h2pjh")]
 position = Vector2(73, 150)
 scale = Vector2(0.2, 0.2)
+
+[node name="Enemy2" parent="." instance=ExtResource("7_suecp")]
+position = Vector2(123, 16)
+
+[node name="Enemy" parent="." instance=ExtResource("7_suecp")]
+position = Vector2(40, 72)

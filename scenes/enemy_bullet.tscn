@@ -1,0 +1,41 @@
+[gd_scene load_steps=6 format=3 uid="uid://dtkqqgmtrxbgx"]
+
+[ext_resource type="Texture2D" uid="uid://b0phsrmfmxa73" path="res://assets/sprite_Benemy_fire.png" id="1_5f7pd"]
+[ext_resource type="Script" path="res://scripts/enemy_bullet.gd" id="1_alrtk"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yri1y"]
+atlas = ExtResource("1_5f7pd")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o1ymm"]
+atlas = ExtResource("1_5f7pd")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_f8knd"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yri1y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o1ymm")
+}],
+"loop": true,
+"name": &"default",
+"speed": 3.0
+}]
+
+[node name="enemy_bullet" type="Node2D"]
+script = ExtResource("1_alrtk")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.609375, 0.609375)
+sprite_frames = SubResource("SpriteFrames_f8knd")
+autoplay = "default"
+frame_progress = 0.990572
+
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
+position = Vector2(-0.0589933, -0.616551)
+rotation = 1.5708
+scale = Vector2(0.62859, 0.573248)
+enable_node_path = NodePath("")
