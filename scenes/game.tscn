@@ -1,8 +1,52 @@
-[gd_scene load_steps=2 format=3 uid="uid://x1ytt22jc8rk"]
+[gd_scene load_steps=8 format=3 uid="uid://x1ytt22jc8rk"]
 
+[ext_resource type="Script" path="res://scenes/parallax_background.gd" id="1_4jdfk"]
 [ext_resource type="PackedScene" uid="uid://doxthayeumto7" path="res://scenes/player.tscn" id="1_h2pjh"]
+[ext_resource type="Texture2D" uid="uid://dn8yxsx30kwgg" path="res://parallax/space-dog_asset_parallax_0.png" id="2_fke6a"]
+[ext_resource type="Texture2D" uid="uid://dhw07qe7h2gyx" path="res://parallax/space-dog_asset_parallax_10.png" id="3_y6lnp"]
+[ext_resource type="Texture2D" uid="uid://bsqhishv3e3rq" path="res://parallax/space-dog_asset_parallax_11.png" id="4_bwatb"]
+[ext_resource type="Texture2D" uid="uid://ybswwfn72hpf" path="res://parallax/space-dog_asset_parallax_2.png" id="5_n82uh"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_hyx6j"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_y6lnp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_bwatb")
+}],
+"loop": true,
+"name": &"default",
+"speed": 1.0
+}]
 
 [node name="Game" type="Node2D"]
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+script = ExtResource("1_4jdfk")
+
+[node name="SpaceLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/SpaceLayer"]
+position = Vector2(80, 149)
+texture = ExtResource("2_fke6a")
+
+[node name="WStarsLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_mirroring = Vector2(0, 320)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="ParallaxBackground/WStarsLayer"]
+position = Vector2(81, 149)
+sprite_frames = SubResource("SpriteFrames_hyx6j")
+autoplay = "default"
+frame_progress = 0.664691
+
+[node name="BYStarsLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_mirroring = Vector2(0, 320)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/BYStarsLayer"]
+position = Vector2(80, 149)
+texture = ExtResource("5_n82uh")
 
 [node name="Player" parent="." instance=ExtResource("1_h2pjh")]
 position = Vector2(73, 150)

@@ -1,18 +1,19 @@
 [gd_scene load_steps=3 format=3 uid="uid://cuoxp3mkmlny5"]
 
 [ext_resource type="Script" path="res://scripts/player_bullet.gd" id="1_xl7dl"]
-[ext_resource type="Texture2D" uid="uid://c6x6paruffmn8" path="res://icon.svg" id="2_jx7uy"]
+[ext_resource type="Texture2D" uid="uid://bx4mo6cn6f78t" path="res://assets/sprite_Bplayer_long.png" id="2_uocue"]
 
 [node name="player_bullet" type="Node2D"]
 script = ExtResource("1_xl7dl")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.171875, 0.152344)
-texture = ExtResource("2_jx7uy")
-
 [node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
-position = Vector2(9.53674e-07, -2.38419e-07)
-scale = Vector2(1, 0.9)
-enable_node_path = NodePath("../Sprite2D")
+position = Vector2(-0.548202, 0.0353178)
+rotation = 1.5708
+scale = Vector2(0.924196, 0.382548)
+enable_node_path = NodePath("")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+rotation = 1.5708
+texture = ExtResource("2_uocue")
 
 [connection signal="screen_exited" from="VisibleOnScreenEnabler2D" to="." method="_on_visible_on_screen_enabler_2d_screen_exited"]
