@@ -1,8 +1,8 @@
 @tool
 extends Node2D
 @export var enemy_scenes: Array[PackedScene] = []
-@export_range(0.1, 10.0, 0.1) var min_spawn_interval: float = 1.0
-@export_range(0.1, 10.0, 0.1) var max_spawn_interval: float = 3.0
+@export_range(0.1, 10.0, 0.1) var min_spawn_interval: float = 3
+@export_range(0.1, 10.0, 0.1) var max_spawn_interval: float = 5
 @export var spawn_area: Rect2 = Rect2(-32, -32, 320, 40) # relative to this node's global_position
 @export var max_enemies: int = 5
 
@@ -42,26 +42,51 @@ func _on_timeout() -> void:
 
 	var instance = scene.instantiate()
 	# position relative to this spawner's global_position
-	var local_x = randf() * spawn_area.size.x + spawn_area.position.x
-	var local_y = randf() * spawn_area.size.y + spawn_area.position.y
+	# choose a spawn side outside the visible world rect and a random target inside it
 	if instance is Node2D:
-		var world_pos = global_position + Vector2(local_x, local_y)
-		# clamp to viewport visible rect (convert canvas coords to world coords)
+		# compute visible world rect
 		var visible = get_viewport().get_visible_rect()
-		# Default: treat visible rect as world rect (works when Camera2D is default)
 		var visible_world_pos = visible.position
 		var visible_world_size = visible.size
-		# If there's an active Camera2D, compute visible world rect from its position and zoom
 		var cam = get_viewport().get_camera_2d()
 		if cam != null:
 			var cam_pos = cam.global_position
 			var cam_zoom = cam.zoom
 			visible_world_size = visible.size * cam_zoom
 			visible_world_pos = cam_pos - visible_world_size * 0.5
-		# clamp to computed world visible rect
-		world_pos.x = clamp(world_pos.x, visible_world_pos.x, visible_world_pos.x + visible_world_size.x)
-		world_pos.y = clamp(world_pos.y, visible_world_pos.y, visible_world_pos.y + visible_world_size.y)
-		instance.position = world_pos
+
+		# pick a random point inside visible rect as target
+		var target_x = randf_range(visible_world_pos.x, visible_world_pos.x + visible_world_size.x)
+		var target_y = randf_range(visible_world_pos.y, visible_world_pos.y + visible_world_size.y)
+		var target_pos = Vector2(target_x, target_y)
+
+		# pick a spawn side: 0=left,1=right,2=top,3=bottom
+		var side = randi() % 4
+		var margin = 48.0
+		var spawn_pos = Vector2()
+		match side:
+			0:
+				# left
+				spawn_pos.x = visible_world_pos.x - margin
+				spawn_pos.y = randf_range(visible_world_pos.y, visible_world_pos.y + visible_world_size.y)
+			1:
+				# right
+				spawn_pos.x = visible_world_pos.x + visible_world_size.x + margin
+				spawn_pos.y = randf_range(visible_world_pos.y, visible_world_pos.y + visible_world_size.y)
+			2:
+				# top
+				spawn_pos.y = visible_world_pos.y - margin
+				spawn_pos.x = randf_range(visible_world_pos.x, visible_world_pos.x + visible_world_size.x)
+			3:
+				# bottom
+				spawn_pos.y = visible_world_pos.y + visible_world_size.y + margin
+				spawn_pos.x = randf_range(visible_world_pos.x, visible_world_pos.x + visible_world_size.x)
+
+		instance.position = spawn_pos
+		# provide the target position and a randomized speed to the enemy, if it supports it
+		if instance.has_method("set_move_target"):
+			var speed = randf_range(40.0, 120.0)
+			instance.call("set_move_target", target_pos, speed)
 
 	# add to the current active scene root
 	var root = get_tree().current_scene

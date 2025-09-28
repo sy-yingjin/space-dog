@@ -27,9 +27,12 @@ func _process(delta: float) -> void:
 	for r in results:
 		var col = r.collider
 		if col != null and col.is_in_group("player"):
-			# trigger game over
-			var root = get_tree().current_scene
-			if root != null and root.has_method("show_game_over"):
-				root.call("show_game_over")
+			# try to call die() on player so it can play explosion, otherwise fallback to game over
+			if col.has_method("die"):
+				col.call("die")
+			else:
+				var root = get_tree().current_scene
+				if root != null and root.has_method("show_game_over"):
+					root.call("show_game_over")
 			queue_free()
 			return

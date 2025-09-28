@@ -28,11 +28,9 @@ func _process(delta: float) -> void:
 	for r in results:
 		var col = r.collider
 		if col != null and col.is_in_group("enemies"):
-			# increment score via Game node
-			var root = get_tree().current_scene
-			if root != null and root.has_method("add_score"):
-				root.call("add_score", 100)
-			# remove enemy and this bullet
-			col.queue_free()
+			# tell enemy it took damage; enemy handles scoring and freeing
+			if col.has_method("take_damage"):
+				col.call("take_damage", 1)
+			# remove this bullet regardless
 			queue_free()
 			return

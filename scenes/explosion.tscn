@@ -1,0 +1,36 @@
+[gd_scene load_steps=3 format=3 uid="uid://explosionscene"]
+
+[ext_resource type="Texture2D" uid="uid://sheet" path="res://assets/space-dog-SHEET.png" id="1_sheet"]
+[ext_resource type="Script" path="res://scripts/explosion.gd" id="2_script"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_exp_a"]
+atlas = ExtResource("1_sheet")
+region = Rect2(0, 144, 96, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_exp_b"]
+atlas = ExtResource("1_sheet")
+region = Rect2(0, 192, 96, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_exp_c"]
+atlas = ExtResource("1_sheet")
+region = Rect2(0, 240, 96, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_exp_d"]
+atlas = ExtResource("1_sheet")
+region = Rect2(0, 288, 96, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_explosion"]
+animations = [{
+"frames": [{"duration": 1.0, "texture": SubResource("AtlasTexture_exp_a")}, {"duration": 1.0, "texture": SubResource("AtlasTexture_exp_b")}, {"duration": 1.0, "texture": SubResource("AtlasTexture_exp_c")}, {"duration": 1.0, "texture": SubResource("AtlasTexture_exp_d")}],
+"loop": false,
+"name": &"default",
+"speed": 8.0
+}]
+
+[node name="Explosion" type="Node2D"]
+script = ExtResource("2_script")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.8, 0.8)
+sprite_frames = SubResource("SpriteFrames_explosion")
+autoplay = "default"
