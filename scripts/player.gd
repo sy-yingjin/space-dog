@@ -33,3 +33,6 @@ func _process(delta: float) -> void:
 		
 func fire_bullet() -> void:
 	spawn_bullet.spawn(muzzle.global_position)
+
+func _ready() -> void:
+	add_to_group("player")

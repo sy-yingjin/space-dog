@@ -10,14 +10,17 @@ var HP = 100
 
 func _ready() -> void:
 	fire_timer.timeout.connect(fire_bullets)
+	add_to_group("enemies")
 
 func _process(delta: float) -> void:
 	
 	
 	if HP <= 0:
 		animated_sprite_2d.play("destroyed")
-		# update score
-		# self destruct
+		# update score (find Game node)
+		var root = get_tree().current_scene
+		if root != null and root.has_method("add_score"):
+			root.call("add_score", 100)
 		queue_free()
 	
 	pass

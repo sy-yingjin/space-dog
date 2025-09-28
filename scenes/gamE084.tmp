@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://x1ytt22jc8rk"]
+[gd_scene load_steps=10 format=3 uid="uid://x1ytt22jc8rk"]
 
 [ext_resource type="Script" path="res://scenes/parallax_background.gd" id="1_4jdfk"]
 [ext_resource type="PackedScene" uid="uid://doxthayeumto7" path="res://scenes/player.tscn" id="1_h2pjh"]
@@ -8,7 +8,6 @@
 [ext_resource type="Texture2D" uid="uid://ybswwfn72hpf" path="res://parallax/space-dog_asset_parallax_2.png" id="5_n82uh"]
 [ext_resource type="PackedScene" uid="uid://dagnn5tepb5q8" path="res://scenes/enemy.tscn" id="7_suecp"]
 [ext_resource type="Script" path="res://scripts/enemy_spawner.gd" id="8_spawner"]
-[ext_resource type="Script" path="res://scripts/game.gd" id="9_game"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_hyx6j"]
 animations = [{
@@ -25,7 +24,6 @@ animations = [{
 }]
 
 [node name="Game" type="Node2D"]
-script = ExtResource("9_game")
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 script = ExtResource("1_4jdfk")
@@ -63,10 +61,3 @@ min_spawn_interval = 0.8
 max_spawn_interval = 2.0
 spawn_area = Rect2(0, -40, 220, 40)
 max_enemies = 6
-
-[node name="ScoreLabel" type="Label" parent="."]
-offset_left = 8.0
-offset_top = 8.0
-offset_right = 8.0
-offset_bottom = 8.0
-text = "Score: 0"

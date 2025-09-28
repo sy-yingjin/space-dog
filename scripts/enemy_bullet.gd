@@ -12,6 +12,24 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	
 	# constant movement of bullet
 	position += Vector2(0, 1) * speed * delta
+
+	# check for collisions at this point (player)
+	var space_state = get_world_2d().direct_space_state
+	var params = PhysicsPointQueryParameters2D.new()
+	params.position = position
+	params.collide_with_bodies = true
+	params.collide_with_areas = false
+	params.exclude = []
+	params.collision_mask = 0x7FFFFFFF
+	var results = space_state.intersect_point(params)
+	for r in results:
+		var col = r.collider
+		if col != null and col.is_in_group("player"):
+			# trigger game over
+			var root = get_tree().current_scene
+			if root != null and root.has_method("show_game_over"):
+				root.call("show_game_over")
+			queue_free()
+			return
