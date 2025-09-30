@@ -1,8 +1,8 @@
 @tool
 extends Node2D
 @export var enemy_scenes: Array[PackedScene] = []
-@export_range(0.1, 10.0, 0.1) var min_spawn_interval: float = 3
-@export_range(0.1, 10.0, 0.1) var max_spawn_interval: float = 5
+@export_range(0.1, 10.0, 0.1) var min_spawn_interval: float = 1
+@export_range(0.1, 10.0, 0.1) var max_spawn_interval: float = 1
 @export var spawn_area: Rect2 = Rect2(-32, -32, 320, 40) # relative to this node's global_position
 @export var max_enemies: int = 5
 
@@ -68,19 +68,19 @@ func _on_timeout() -> void:
 			0:
 				# left
 				spawn_pos.x = visible_world_pos.x - margin
-				spawn_pos.y = randf_range(visible_world_pos.y, visible_world_pos.y + visible_world_size.y)
+				spawn_pos.y = randf_range(visible_world_pos.y, visible_world_pos.y + (visible_world_size.y*0.25))
 			1:
-				# right
+				# righta
 				spawn_pos.x = visible_world_pos.x + visible_world_size.x + margin
-				spawn_pos.y = randf_range(visible_world_pos.y, visible_world_pos.y + visible_world_size.y)
+				spawn_pos.y = randf_range(visible_world_pos.y, visible_world_pos.y + (visible_world_size.y*0.25))
 			2:
 				# top
 				spawn_pos.y = visible_world_pos.y - margin
 				spawn_pos.x = randf_range(visible_world_pos.x, visible_world_pos.x + visible_world_size.x)
-			3:
-				# bottom
-				spawn_pos.y = visible_world_pos.y + visible_world_size.y + margin
-				spawn_pos.x = randf_range(visible_world_pos.x, visible_world_pos.x + visible_world_size.x)
+			#3:
+				## bottom
+				#spawn_pos.y = visible_world_pos.y + visible_world_size.y + margin
+				#spawn_pos.x = randf_range(visible_world_pos.x, visible_world_pos.x + visible_world_size.x)
 
 		instance.position = spawn_pos
 		# provide the target position and a randomized speed to the enemy, if it supports it

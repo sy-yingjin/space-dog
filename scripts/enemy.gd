@@ -8,7 +8,7 @@ extends CharacterBody2D
 @onready var collision_polygon: CollisionPolygon2D = $CollisionPolygon2D
 const EXPLOSION_SCENE = preload("res://scenes/explosion.tscn")
 
-var HP = 2
+var HP = 3
 var _move_target = null
 var _move_speed: float = 80.0
 var _drift_direction: Vector2 = Vector2.ZERO

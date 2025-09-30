@@ -39,7 +39,7 @@ func fire_bullet() -> void:
 
 func _ready() -> void:
 	add_to_group("player")
-
+	
 func die() -> void:
 	# hide visuals and disable collision
 	if animated_sprite_2d != null:
